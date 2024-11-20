@@ -9,6 +9,14 @@ class Car {
   createRandomNumber() {
     return Random.pickNumberInRange(0, 9);
   }
+
+  stopAndGo() {
+    const number = this.createRandomNumber();
+
+    if (number > 3) {
+      this.distance += number;
+    }
+  }
 }
 
 export default Car;

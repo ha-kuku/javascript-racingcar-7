@@ -7,9 +7,12 @@ class App {
     const input = await Console.readLineAsync(INPUT_MESSAGE.carName);
     Validation.validateInputBlank(input);
 
-    const cars = input.split(',').map((el) => {
+    const carNames = input.split(',').map((el) => {
       Validation.validateNameLength(el);
+      return el;
     });
+
+    return carNames;
   };
 
   getPlayCount = async () => {
@@ -20,7 +23,7 @@ class App {
 
   async run() {
     try {
-      await this.getCarName();
+      const carNames = await this.getCarName();
       await this.getPlayCount();
     } catch (err) {
       Console.print(err.message);
