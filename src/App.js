@@ -12,9 +12,16 @@ class App {
     });
   };
 
+  getPlayCount = async () => {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.playCount);
+    Validation.validateInputBlank(input);
+    Validation.validatePlayCount(input);
+  };
+
   async run() {
     try {
       await this.getCarName();
+      await this.getPlayCount();
     } catch (err) {
       Console.print(err.message);
       throw err;
