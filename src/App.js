@@ -1,29 +1,31 @@
 import { INPUT_MESSAGE } from './Constants.js';
 import { Console } from '@woowacourse/mission-utils';
-import Validation from './Validation.js';
+import { validateInputBlank, validateNameLength, validatePlayCount } from './Validation.js';
 
 class App {
-  getCarName = async () => {
+  async getCarName() {
     const input = await Console.readLineAsync(INPUT_MESSAGE.carName);
-    Validation.validateInputBlank(input);
+    validateInputBlank(input);
 
-    const carNames = input.split(',').map((el) => {
-      Validation.validateNameLength(el);
-      return el;
+    const carNames = input.split(',').map((name) => {
+      validateNameLength(name);
+      return name;
     });
 
     return carNames;
-  };
+  }
 
-  getPlayCount = async () => {
+  async getPlayCount() {
     const input = await Console.readLineAsync(INPUT_MESSAGE.playCount);
-    Validation.validateInputBlank(input);
-    Validation.validatePlayCount(input);
-  };
+    validateInputBlank(input);
+    validatePlayCount(input);
+
+    return Number(input);
+  }
 
   async run() {
     try {
-      const carNames = await this.getCarName();
+      await this.getCarName();
       await this.getPlayCount();
     } catch (err) {
       Console.print(err.message);
